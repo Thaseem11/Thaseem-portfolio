@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Thaseem M — HR Professional & Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#080D14;
+  --ink2:#0F1923;
+  --ink3:#162030;
+  --teal:#00E5CC;
+  --teal2:#00B8A4;
+  --gold:#F5C842;
+  --rose:#FF6B8A;
+  --text:#C8D8E8;
+  --muted:#5A7A9A;
+  --white:#F0F8FF;
+  --border:rgba(0,229,204,0.1);
+  --r:10px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ink);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── CURSOR ── */
+.cursor{position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:difference}
+.cursor-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;transform:translate(-50%,-50%);transition:transform .1s}
+.cursor-ring{width:36px;height:36px;border:1.5px solid rgba(0,229,204,0.5);border-radius:50%;transform:translate(-50%,-50%);transition:all .15s ease;position:fixed;pointer-events:none;z-index:9998}
+body:hover .cursor-dot{transform:translate(-50%,-50%) scale(1)}
+
+/* ── SIDE NAV ── */
+.side-nav{
+  position:fixed;right:2rem;top:50%;transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;gap:12px;
+}
+.side-nav a{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--muted);display:block;
+  transition:all .3s;text-decoration:none;position:relative;
+}
+.side-nav a.active{background:var(--teal);transform:scale(1.5)}
+.side-nav a:hover{background:var(--teal)}
+.side-nav a[data-label]::before{
+  content:attr(data-label);
+  position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--teal);white-space:nowrap;opacity:0;transition:opacity .2s;
+  font-family:'JetBrains Mono',monospace;
+}
+.side-nav a:hover::before{opacity:1}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:1rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,13,20,0);transition:background .4s,backdrop-filter .4s;
+}
+.topbar.scrolled{background:rgba(8,13,20,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.logo{
+  font-family:'Syne',sans-serif;font-size:17px;font-weight:800;
+  color:var(--white);letter-spacing:-.02em;
+}
+.logo span{color:var(--teal)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:13px;font-weight:500;color:var(--muted);
+  text-decoration:none;transition:color .2s;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.nav-links a:hover{color:var(--teal)}
+.nav-cta{
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
+  padding:8px 20px;border-radius:6px;
+  background:var(--teal);color:var(--ink);
+  border:none;cursor:none;transition:all .2s;text-decoration:none;
+}
+.nav-cta:hover{background:var(--teal2);transform:translateY(-1px)}
+
+/* ── SECTIONS ── */
+section{min-height:100vh;position:relative}
+.s-inner{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+
+/* ── HERO ── */
+#hero{
+  display:flex;flex-direction:column;justify-content:center;
+  padding-top:80px;overflow:hidden;
+  background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(0,229,204,0.07) 0%,transparent 70%);
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:500;color:var(--teal);
+  letter-spacing:.15em;text-transform:uppercase;
+  margin-bottom:1.5rem;opacity:0;
+  animation:fadeUp .6s .2s forwards;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--teal)}
+.hero-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:800;line-height:1;
+  color:var(--white);
+  margin-bottom:.5rem;
+  opacity:0;animation:fadeUp .6s .35s forwards;
+}
+/* THE SIGNATURE: HR × TECH split identity */
+.hero-identity{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:2rem;
+  opacity:0;animation:fadeUp .6s .5s forwards;
+}
+.identity-pill{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.1rem,3vw,1.6rem);font-weight:700;
+  padding:.35em 1em;border-radius:4px;
+  letter-spacing:-.01em;
+}
+.pill-hr{background:var(--teal);color:var(--ink)}
+.pill-x{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--muted);font-weight:300}
+.pill-tech{
+  background:transparent;color:var(--teal);
+  border:2px solid var(--teal);
+}
+.pill-desc{
+  font-family:'DM Sans',sans-serif;
+  font-size:clamp(.85rem,1.5vw,1rem);color:var(--muted);
+  font-weight:400;font-style:italic;
+  padding-left:1rem;border-left:2px solid var(--border);
+  max-width:260px;line-height:1.5;
+}
+.hero-bio{
+  font-size:clamp(15px,2vw,17px);color:var(--muted);
+  line-height:1.75;max-width:540px;margin-bottom:2.5rem;
+  opacity:0;animation:fadeUp .6s .65s forwards;
+}
+.hero-actions{
+  display:flex;gap:12px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .6s .8s forwards;
+}
+.btn-p{
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  padding:12px 28px;border-radius:7px;border:none;cursor:none;
+  transition:all .25s;display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;
+}
+.btn-solid{background:var(--teal);color:var(--ink)}
+.btn-solid:hover{background:var(--teal2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,229,204,0.25)}
+.btn-border{background:transparent;color:var(--text);border:1.5px solid var(--border)}
+.btn-border:hover{border-color:var(--teal);color:var(--teal)}
+
+/* Floating stats */
+.hero-stats{
+  position:absolute;right:5%;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:1.5rem;
+  opacity:0;animation:fadeUp .6s 1s forwards;
+}
+.hstat{
+  text-align:right;padding:.75rem 1.25rem;
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:var(--r);border-right:3px solid var(--teal);
+}
+.hstat-num{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;color:var(--teal);line-height:1}
+.hstat-label{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500;letter-spacing:.05em}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;
+  opacity:0;animation:fadeUp .6s 1.2s forwards;
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--teal),transparent);animation:scrollDown 1.5s infinite}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── ABOUT ── */
+#about{
+  background:var(--ink2);
+  display:flex;align-items:center;
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:center;
+  padding:6rem 0;
+}
+.about-left{position:relative}
+.about-card{
+  background:var(--ink3);border:1px solid var(--border);
+  border-radius:14px;padding:2.5rem;position:relative;overflow:hidden;
+}
+.about-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--gold));
+}
+.about-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--teal),var(--teal2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--ink);
+  margin-bottom:1.25rem;
+}
+.about-card h3{
+  font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;
+  color:var(--white);margin-bottom:.25rem;
+}
+.about-card .role{font-size:13px;color:var(--teal);font-weight:500;margin-bottom:1.25rem;font-family:'JetBrains Mono',monospace}
+.about-detail{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin-bottom:.6rem}
+.about-detail .icon{color:var(--teal);font-size:14px;width:18px}
+.about-detail a{color:var(--muted);text-decoration:none;transition:color .2s}
+.about-detail a:hover{color:var(--teal)}
+.lang-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
+.lang-chip{
+  font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;
+  background:rgba(0,229,204,0.08);color:var(--teal);border:1px solid var(--border);
+}
+.sec-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:500;color:var(--teal);
+  letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;max-width:48px;height:1px;background:var(--teal)}
+.sec-title{
+  font-family:'Syne',sans-serif;font-size:clamp(1.75rem,4vw,2.5rem);
+  font-weight:800;color:var(--white);line-height:1.1;margin-bottom:1rem;
+}
+.sec-title em{color:var(--teal);font-style:normal}
+.about-text{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:1.25rem}
+
+/* ── SKILLS ── */
+#skills{display:flex;align-items:center;padding:5rem 0}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.skill-card{
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.5rem;
+  transition:border-color .25s,transform .25s;
+}
+.skill-card:hover{border-color:var(--teal);transform:translateY(-3px)}
+.skill-card-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:1rem;
+}
+.skill-icon{
+  width:38px;height:38px;border-radius:8px;
+  background:rgba(0,229,204,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.skill-cat{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--white)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+.skill-tag{
+  font-size:12px;font-weight:500;padding:4px 10px;border-radius:5px;
+  background:var(--ink3);color:var(--text);border:1px solid var(--border);
+  transition:all .2s;
+}
+.skill-card:hover .skill-tag{border-color:rgba(0,229,204,0.2)}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--ink2);display:flex;align-items:center;padding:5rem 0}
+.exp-entry{
+  display:grid;grid-template-columns:200px 1fr;gap:2.5rem;
+  padding:2.5rem 0;border-bottom:1px solid var(--border);
+  position:relative;
+}
+.exp-entry:last-child{border-bottom:none}
+.exp-meta{padding-top:.2rem}
+.exp-date{
+  font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--teal);font-weight:500;letter-spacing:.05em;margin-bottom:.5rem;
+}
+.exp-org{font-size:13px;color:var(--muted);font-weight:400}
+.exp-body h3{
+  font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;
+  color:var(--white);margin-bottom:.25rem;
+}
+.exp-body .exp-type{
+  font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;
+  background:rgba(0,229,204,0.1);color:var(--teal);
+  display:inline-block;margin-bottom:.75rem;
+}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.exp-bullets li{
+  font-size:14px;color:var(--muted);line-height:1.6;
+  padding-left:1rem;position:relative;
+}
+.exp-bullets li::before{
+  content:'▸';position:absolute;left:0;color:var(--teal);font-size:10px;top:4px;
+}
+
+/* ── PROJECTS ── */
+#projects{display:flex;align-items:center;padding:5rem 0}
+.projects-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;
+  margin-top:3rem;
+}
+.proj-card{
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:14px;padding:1.75rem;
+  transition:all .3s;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.proj-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.proj-card.teal::after{background:var(--teal)}
+.proj-card.gold::after{background:var(--gold)}
+.proj-card.rose::after{background:var(--rose)}
+.proj-card.blue::after{background:#60A5FA}
+.proj-card:hover{transform:translateY(-4px);border-color:rgba(0,229,204,0.25)}
+.proj-card:hover::after{transform:scaleX(1)}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.proj-icon{
+  width:42px;height:42px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;
+}
+.proj-icon.teal{background:rgba(0,229,204,0.1)}
+.proj-icon.gold{background:rgba(245,200,66,0.1)}
+.proj-icon.rose{background:rgba(255,107,138,0.1)}
+.proj-icon.blue{background:rgba(96,165,250,0.1)}
+.proj-tools{display:flex;gap:6px;flex-wrap:wrap}
+.proj-tool{
+  font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;
+  background:var(--ink3);color:var(--muted);border:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;
+}
+.proj-title{
+  font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;
+  color:var(--white);margin-bottom:.5rem;
+}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1}
+.proj-metrics{
+  display:flex;gap:12px;margin-top:1rem;flex-wrap:wrap;
+}
+.proj-metric{
+  font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;
+  font-family:'JetBrains Mono',monospace;
+}
+.teal .proj-metric{background:rgba(0,229,204,0.08);color:var(--teal)}
+.gold .proj-metric{background:rgba(245,200,66,0.08);color:var(--gold)}
+.rose .proj-metric{background:rgba(255,107,138,0.08);color:var(--rose)}
+.blue .proj-metric{background:rgba(96,165,250,0.08);color:#93C5FD}
+
+/* ── EDUCATION ── */
+#education{background:var(--ink2);display:flex;align-items:center;padding:5rem 0}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:3rem}
+.edu-card{
+  background:var(--ink3);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.5rem;position:relative;
+  overflow:hidden;
+}
+.edu-card::before{
+  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:linear-gradient(180deg,var(--teal),transparent);
+}
+.edu-degree{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
+.edu-school{font-size:13px;color:var(--muted);margin-bottom:.5rem}
+.edu-year{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);
+  font-weight:500;letter-spacing:.05em;
+}
+.edu-score{
+  font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;
+  background:rgba(0,229,204,0.1);color:var(--teal);
+  display:inline-block;margin-top:.5rem;
+}
+
+/* ── CERTIFICATIONS ── */
+#certs{display:flex;align-items:center;padding:5rem 0}
+.cert-list{margin-top:3rem;display:flex;flex-direction:column;gap:.75rem}
+.cert-item{
+  display:grid;grid-template-columns:1fr auto;
+  align-items:center;gap:1.5rem;
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.1rem 1.5rem;
+  transition:border-color .2s;
+}
+.cert-item:hover{border-color:var(--teal)}
+.cert-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:.2rem}
+.cert-issuer{font-size:12px;color:var(--muted)}
+.cert-badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:600;padding:4px 12px;border-radius:99px;
+  background:rgba(0,229,204,0.08);color:var(--teal);
+  border:1px solid var(--border);white-space:nowrap;
+}
+.cert-badge.gold{background:rgba(245,200,66,0.08);color:var(--gold);border-color:rgba(245,200,66,0.2)}
+
+/* ── LEADERSHIP ── */
+#leadership{background:var(--ink2);display:flex;align-items:center;padding:5rem 0}
+.lead-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+.lead-card{
+  background:var(--ink3);border:1px solid var(--border);
+  border-radius:var(--r);padding:1.5rem;transition:all .25s;
+}
+.lead-card:hover{border-color:var(--teal);transform:translateY(-3px)}
+.lead-icon{font-size:1.75rem;margin-bottom:.75rem}
+.lead-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.lead-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── CONTACT ── */
+#contact{
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:5rem 0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,229,204,0.06) 0%,transparent 70%);
+}
+.contact-inner{max-width:600px}
+.contact-inner .sec-title{font-size:clamp(2rem,5vw,3.5rem)}
+.contact-desc{font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:2.5rem}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.contact-link{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:500;color:var(--text);
+  background:var(--ink2);border:1px solid var(--border);
+  border-radius:8px;padding:.75rem 1.25rem;
+  text-decoration:none;transition:all .2s;cursor:none;
+}
+.contact-link:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.contact-link .icon{font-size:16px}
+
+/* ── FOOTER ── */
+footer{
+  padding:1.5rem 2.5rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:var(--muted);flex-wrap:wrap;gap:.5rem;
+}
+footer a{color:var(--teal);text-decoration:none}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+
+/* ── DIVIDER ── */
+.teal-line{height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);margin:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid,.edu-grid,.skills-grid,.projects-grid,.lead-grid{grid-template-columns:1fr}
+  .exp-entry{grid-template-columns:1fr;gap:.75rem}
+  .hero-stats{display:none}
+  .side-nav{display:none}
+}
+@media(max-width:600px){
+  .s-inner{padding:0 1.25rem}
+  .nav-links{display:none}
+  body{cursor:auto}
+  .cursor,.cursor-ring{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Side nav -->
+<nav class="side-nav" id="sideNav">
+  <a href="#hero"       data-label="Home"          data-sec="hero"        class="active"></a>
+  <a href="#about"      data-label="About"          data-sec="about"></a>
+  <a href="#skills"     data-label="Skills"         data-sec="skills"></a>
+  <a href="#experience" data-label="Experience"     data-sec="experience"></a>
+  <a href="#projects"   data-label="Projects"       data-sec="projects"></a>
+  <a href="#education"  data-label="Education"      data-sec="education"></a>
+  <a href="#certs"      data-label="Certifications" data-sec="certs"></a>
+  <a href="#leadership" data-label="Leadership"     data-sec="leadership"></a>
+  <a href="#contact"    data-label="Contact"        data-sec="contact"></a>
+</nav>
+
+<!-- Topbar -->
+<nav class="topbar" id="topbar">
+  <div class="logo">T<span>.</span>Thaseem</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:designwiththaseem@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section id="hero">
+<div class="s-inner" style="padding-top:6rem;padding-bottom:4rem;min-height:100vh;display:flex;flex-direction:column;justify-content:center">
+  <div class="hero-eyebrow">MBA · HR Management · IIT Guwahati Certified</div>
+  <div class="hero-name">Thaseem M</div>
+  <div class="hero-identity">
+    <span class="identity-pill pill-hr">HR</span>
+    <span class="pill-x">×</span>
+    <span class="identity-pill pill-tech">Tech</span>
+    <div class="pill-desc">Where people strategy meets data intelligence</div>
+  </div>
+  <p class="hero-bio">
+    Aspiring HR Professional combining an MBA in HR Management with a B.E. in Computer Science.
+    I bring AI-certified knowledge, Power BI analytics, and real-world recruitment coordination
+    to build smarter, data-driven people operations.
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn-p btn-solid">View Projects →</a>
+    <a href="#contact" class="btn-p btn-border">Get in Touch</a>
+    <a href="mailto:designwiththaseem@gmail.com" class="btn-p btn-border">✉ Email Me</a>
+  </div>
+
+  <!-- Floating stats -->
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">8.1</div>
+      <div class="hstat-label">CGPA · B.E. CSE</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">75%</div>
+      <div class="hstat-label">NPTEL Elite · AI in HRM</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">4</div>
+      <div class="hstat-label">Languages Spoken</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">100+</div>
+      <div class="hstat-label">Event Participants Led</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     ABOUT
+══════════════════════════════════ -->
+<section id="about">
+<div class="s-inner">
+<div class="about-grid">
+  <div class="about-left reveal">
+    <div class="about-card">
+      <div class="about-avatar">T</div>
+      <h3>Thaseem M</h3>
+      <div class="role">MBA_HR · BE_CSE · AI_Certified</div>
+      <div class="about-detail"><span class="icon">📍</span> Ranipet, Tamil Nadu</div>
+      <div class="about-detail"><span class="icon">📧</span><a href="mailto:designwiththaseem@gmail.com">designwiththaseem@gmail.com</a></div>
+      <div class="about-detail"><span class="icon">📱</span> +91 9585123370</div>
+      <div class="about-detail"><span class="icon">💼</span><a href="https://linkedin.com/in/thaseem-m" target="_blank">LinkedIn · Thaseem M</a></div>
+      <div style="margin-top:1.25rem">
+        <div class="sec-label" style="font-size:10px">Languages</div>
+        <div class="lang-chips">
+          <span class="lang-chip">Tamil — Fluent</span>
+          <span class="lang-chip">English — Fluent</span>
+          <span class="lang-chip">Urdu — Native</span>
+          <span class="lang-chip">German — Beginner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-right reveal reveal-d2">
+    <div class="sec-label">About Me</div>
+    <div class="sec-title">Human-first thinker,<br><em>data-driven</em> executor.</div>
+    <p class="about-text">
+      I'm an MBA student specialising in HR Management with a foundation in Computer Science Engineering.
+      This combination is rare — and intentional. I believe the future of HR belongs to professionals
+      who can read a pivot table as fluently as they read a person.
+    </p>
+    <p class="about-text">
+      Certified in AI in Human Resource Management by IIT Guwahati (NPTEL Elite), I've applied
+      that knowledge through Power BI dashboards, recruitment trackers, and AI-powered tools.
+      My administrative experience at Muba Healthcare gave me real-world grounding in client handling,
+      business communication, and coordinated operations.
+    </p>
+    <p class="about-text">
+      I'm fluent in English and Tamil, comfortable with technology, and genuinely excited about
+      building people-centric workplaces that run on good data.
+    </p>
+    <div style="display:flex;gap:10px;margin-top:1.5rem;flex-wrap:wrap">
+      <a href="#projects" class="btn-p btn-solid" style="font-size:13px;padding:10px 22px">See My Work →</a>
+      <a href="#certs" class="btn-p btn-border" style="font-size:13px;padding:10px 22px">Certifications</a>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     SKILLS
+══════════════════════════════════ -->
+<section id="skills">
+<div class="s-inner" style="padding:6rem 0">
+  <div class="reveal">
+    <div class="sec-label">Core Competencies</div>
+    <div class="sec-title">Skills &amp; <em>Expertise</em></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal reveal-d1">
+      <div class="skill-card-header">
+        <div class="skill-icon">🎯</div>
+        <div class="skill-cat">HR & Recruitment</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">End-to-End Recruitment</span>
+        <span class="skill-tag">Candidate Sourcing</span>
+        <span class="skill-tag">Resume Screening</span>
+        <span class="skill-tag">Onboarding Support</span>
+        <span class="skill-tag">HR Documentation</span>
+        <span class="skill-tag">Employee Engagement</span>
+        <span class="skill-tag">Interview Coordination</span>
+        <span class="skill-tag">Attendance Monitoring</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-d2">
+      <div class="skill-card-header">
+        <div class="skill-icon">📊</div>
+        <div class="skill-cat">Analytics & Tools</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">DAX Measures</span>
+        <span class="skill-tag">HR Analytics</span>
+        <span class="skill-tag">MS Excel</span>
+        <span class="skill-tag">VLOOKUP & Pivot Tables</span>
+        <span class="skill-tag">Google Sheets</span>
+        <span class="skill-tag">Data Visualization</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-d3">
+      <div class="skill-card-header">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-cat">AI & Technology</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">AI in HRM</span>
+        <span class="skill-tag">Claude API</span>
+        <span class="skill-tag">HTML / CSS / JS</span>
+        <span class="skill-tag">React (Basics)</span>
+        <span class="skill-tag">Git & GitHub</span>
+        <span class="skill-tag">AI Agent Design</span>
+        <span class="skill-tag">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-d4">
+      <div class="skill-card-header">
+        <div class="skill-icon">🤝</div>
+        <div class="skill-cat">Soft Skills</div>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">Client Handling</span>
+        <span class="skill-tag">Business Communication</span>
+        <span class="skill-tag">Team Coordination</span>
+        <span class="skill-tag">Event Planning</span>
+        <span class="skill-tag">Time Management</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Peer Mentoring</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════ -->
+<section id="experience">
+<div class="s-inner" style="padding:6rem 0">
+  <div class="reveal">
+    <div class="sec-label">Work History</div>
+    <div class="sec-title">Professional <em>Experience</em></div>
+  </div>
+  <div style="margin-top:3rem">
+    <div class="exp-entry reveal">
+      <div class="exp-meta">
+        <div class="exp-date">2022 — 2024</div>
+        <div class="exp-org">Muba Healthcare<br>Ranipet, Tamil Nadu</div>
+      </div>
+      <div class="exp-body">
+        <h3>Administrative & Operations Assistant</h3>
+        <span class="exp-type">Part-Time · Family Business</span>
+        <ul class="exp-bullets">
+          <li>Managed 20+ inbound client calls daily, ensuring professional and prompt communication across all inquiries.</li>
+          <li>Coordinated product listings across online platforms, supporting digital presence and inventory updates.</li>
+          <li>Drafted and organized business correspondence via text and messaging platforms, maintaining structured communication records.</li>
+          <li>Built core administrative skills including scheduling, professional coordination, and client relationship management.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-entry reveal reveal-d2">
+      <div class="exp-meta">
+        <div class="exp-date">Feb 2026</div>
+        <div class="exp-org">GE Aerospace<br>Virtual Program</div>
+      </div>
+      <div class="exp-body">
+        <h3>Explore Human Resources — Job Simulation</h3>
+        <span class="exp-type">Virtual Experience</span>
+        <ul class="exp-bullets">
+          <li>Completed hands-on HR simulation covering end-to-end recruitment workflows, resume screening, and candidate evaluation.</li>
+          <li>Gained real-world exposure to how global HR teams manage talent pipelines and recruitment coordination.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-entry reveal reveal-d3">
+      <div class="exp-meta">
+        <div class="exp-date">Jan 2026</div>
+        <div class="exp-org">Tata Group<br>Virtual Program</div>
+      </div>
+      <div class="exp-body">
+        <h3>Gen AI Powered Data Analytics</h3>
+        <span class="exp-type">Virtual Experience</span>
+        <ul class="exp-bullets">
+          <li>Applied generative AI to business data challenges as part of Tata's virtual analytics program.</li>
+          <li>Worked on data visualization and insight generation tasks relevant to HR and business operations.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     PROJECTS
+══════════════════════════════════ -->
+<section id="projects">
+<div class="s-inner" style="padding:6rem 0">
+  <div class="reveal">
+    <div class="sec-label">Portfolio</div>
+    <div class="sec-title">Featured <em>Projects</em></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="proj-card teal reveal reveal-d1">
+      <div class="proj-header">
+        <div class="proj-icon teal">📊</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Power BI</span>
+          <span class="proj-tool">DAX</span>
+        </div>
+      </div>
+      <div class="proj-title">HR Analytics Dashboard</div>
+      <div class="proj-desc">Multi-page Power BI dashboard analyzing 1,470 employee records across 3 departments and 9 job roles. Tracked a 16.12% attrition rate and identified R&D as the highest attrition department (56.12%). Built 5 KPI cards using DAX measures — insights directly actionable for HR retention strategy.</div>
+      <div class="proj-metrics">
+        <span class="proj-metric">1,470 Records</span>
+        <span class="proj-metric">16.12% Attrition</span>
+        <span class="proj-metric">5 KPI Cards</span>
+      </div>
+    </div>
+
+    <div class="proj-card gold reveal reveal-d2">
+      <div class="proj-header">
+        <div class="proj-icon gold">🤖</div>
+        <div class="proj-tools">
+          <span class="proj-tool">HTML/JS</span>
+          <span class="proj-tool">Claude API</span>
+        </div>
+      </div>
+      <div class="proj-title">AI-Powered JD Skill Analyzer</div>
+      <div class="proj-desc">A web tool that parses any job description using Claude AI to extract must-have skills, preferred qualifications, and bonus competencies. Generates a profile-to-JD match score with actionable resume improvement suggestions — a direct application of AI in HRM principles.</div>
+      <div class="proj-metrics">
+        <span class="proj-metric">Claude AI</span>
+        <span class="proj-metric">ATS Scoring</span>
+        <span class="proj-metric">Real-time</span>
+      </div>
+    </div>
+
+    <div class="proj-card rose reveal reveal-d3">
+      <div class="proj-header">
+        <div class="proj-icon rose">📋</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Excel</span>
+          <span class="proj-tool">Pivot Tables</span>
+        </div>
+      </div>
+      <div class="proj-title">Recruitment Pipeline Tracker</div>
+      <div class="proj-desc">End-to-end recruitment tracker with 6 pipeline stages from Sourced to Joined. Auto-calculates time-to-hire metrics and tracks sourcing channel effectiveness. Pivot Table dashboard shows stage conversion rates and recruiter-wise performance — reducing manual tracking by ~40%.</div>
+      <div class="proj-metrics">
+        <span class="proj-metric">6 Stages</span>
+        <span class="proj-metric">~40% Time Saved</span>
+      </div>
+    </div>
+
+    <div class="proj-card blue reveal reveal-d4">
+      <div class="proj-header">
+        <div class="proj-icon blue">✅</div>
+        <div class="proj-tools">
+          <span class="proj-tool">Excel</span>
+          <span class="proj-tool">Conditional Formatting</span>
+        </div>
+      </div>
+      <div class="proj-title">Employee Onboarding Automation</div>
+      <div class="proj-desc">Dynamic onboarding tracker for new hires covering 25+ checklist items across IT, HR, and Operations. Conditional formatting-based progress bars, IF/COUNTIF formulas for automated status alerts, and department-wise completion tracking to improve onboarding visibility.</div>
+      <div class="proj-metrics">
+        <span class="proj-metric">25+ Checklist Items</span>
+        <span class="proj-metric">3 Departments</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     EDUCATION
+══════════════════════════════════ -->
+<section id="education">
+<div class="s-inner" style="padding:6rem 0">
+  <div class="reveal">
+    <div class="sec-label">Academic Background</div>
+    <div class="sec-title"><em>Education</em></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal reveal-d1">
+      <div class="edu-degree">Master of Business Administration</div>
+      <div class="edu-degree" style="font-size:.9rem;color:var(--teal);font-weight:600;margin-bottom:.3rem">HR Management</div>
+      <div class="edu-school">Arcot Sri Mahalakshmi WIMCA<br>Thiruvalluvar University</div>
+      <div class="edu-year">2025 — Present</div>
+      <span class="edu-score">Currently Pursuing</span>
+    </div>
+    <div class="edu-card reveal reveal-d2">
+      <div class="edu-degree">Bachelor of Engineering</div>
+      <div class="edu-degree" style="font-size:.9rem;color:var(--teal);font-weight:600;margin-bottom:.3rem">Computer Science & Engineering</div>
+      <div class="edu-school">CAHCET, Anna University<br>Ranipet, Tamil Nadu</div>
+      <div class="edu-year">2021 — 2025</div>
+      <span class="edu-score">CGPA: 8.1 / 10</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     CERTIFICATIONS
+══════════════════════════════════ -->
+<section id="certs">
+<div class="s-inner" style="padding:6rem 0">
+  <div class="reveal">
+    <div class="sec-label">Credentials</div>
+    <div class="sec-title"><em>Certifications</em> &amp; Training</div>
+  </div>
+  <div class="cert-list">
+    <div class="cert-item reveal reveal-d1">
+      <div>
+        <div class="cert-name">AI in Human Resource Management</div>
+        <div class="cert-issuer">NPTEL / IIT Guwahati (SWAYAM) · Jan–Apr 2026</div>
+      </div>
+      <span class="cert-badge gold">🏅 Elite · 75% · 4 Credits</span>
+    </div>
+    <div class="cert-item reveal reveal-d2">
+      <div>
+        <div class="cert-name">Power BI Bootcamp — 6 Hours Hands-On</div>
+        <div class="cert-issuer">Nucleus – Analytics Society of SSCBS · May 2026</div>
+      </div>
+      <span class="cert-badge">Power BI</span>
+    </div>
+    <div class="cert-item reveal reveal-d3">
+      <div>
+        <div class="cert-name">Human Resource Management</div>
+        <div class="cert-issuer">UniAthena / CIQ, UK · September 2025</div>
+      </div>
+      <span class="cert-badge">HR Management</span>
+    </div>
+    <div class="cert-item reveal reveal-d3">
+      <div>
+        <div class="cert-name">HR Management & Strategy</div>
+        <div class="cert-issuer">UpGrad · July 2025</div>
+      </div>
+      <span class="cert-badge">UpGrad</span>
+    </div>
+    <div class="cert-item reveal reveal-d3">
+      <div>
+        <div class="cert-name">5-Day AI Agent Intensive Program</div>
+        <div class="cert-issuer">Google · December 2025</div>
+      </div>
+      <span class="cert-badge">Google</span>
+    </div>
+    <div class="cert-item reveal reveal-d4">
+      <div>
+        <div class="cert-name">Fundamentals of Communication</div>
+        <div class="cert-issuer">UpGrad · July 2025</div>
+      </div>
+      <span class="cert-badge">Soft Skills</span>
+    </div>
+    <div class="cert-item reveal reveal-d4">
+      <div>
+        <div class="cert-name">Fundamentals of Digital Marketing</div>
+        <div class="cert-issuer">Google Digital Garage · July 2023</div>
+      </div>
+      <span class="cert-badge">Google</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     LEADERSHIP
+══════════════════════════════════ -->
+<section id="leadership">
+<div class="s-inner" style="padding:6rem 0">
+  <div class="reveal">
+    <div class="sec-label">Impact</div>
+    <div class="sec-title">Leadership &amp; <em>Achievements</em></div>
+  </div>
+  <div class="lead-grid">
+    <div class="lead-card reveal reveal-d1">
+      <div class="lead-icon">🎪</div>
+      <div class="lead-title">Revibe Symposium Organizer</div>
+      <div class="lead-desc">Co-organized Revibe, an inter-departmental college symposium. Managed end-to-end event planning, speaker coordination, and on-day logistics for 100+ participants at CAHCET (2021–2025).</div>
+    </div>
+    <div class="lead-card reveal reveal-d2">
+      <div class="lead-icon">🧑‍💻</div>
+      <div class="lead-title">Workshop Facilitator</div>
+      <div class="lead-desc">Conducted a hands-on Git & Web Development workshop for junior students. Built peer mentoring and technical communication skills as a Committee Member, Students Guidance Cell.</div>
+    </div>
+    <div class="lead-card reveal reveal-d3">
+      <div class="lead-icon">🏆</div>
+      <div class="lead-title">Tata Crucible Campus Quiz</div>
+      <div class="lead-desc">Participated in the prestigious Tata Crucible Campus Quiz (November 2025), demonstrating business acumen, competitive mindset, and applied knowledge across domains.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="teal-line"></div>
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section id="contact">
+<div class="s-inner contact-inner reveal">
+  <div class="sec-label" style="justify-content:center">Get In Touch</div>
+  <div class="sec-title">Let's <em>connect</em> &amp;<br>build something together</div>
+  <p class="contact-desc">
+    I'm currently seeking HR internship opportunities where I can apply my analytical skills,
+    bilingual communication, and AI-certified HR knowledge. Open to conversations, collaborations,
+    and new opportunities.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:designwiththaseem@gmail.com" class="contact-link">
+      <span class="icon">✉</span> designwiththaseem@gmail.com
+    </a>
+    <a href="tel:+919585123370" class="contact-link">
+      <span class="icon">📱</span> +91 9585123370
+    </a>
+    <a href="https://linkedin.com/in/thaseem-m" target="_blank" class="contact-link">
+      <span class="icon">💼</span> LinkedIn · Thaseem M
+    </a>
+    <a href="#" class="contact-link">
+      <span class="icon">📍</span> Ranipet, Tamil Nadu
+    </a>
+  </div>
+  <a href="mailto:designwiththaseem@gmail.com" class="btn-p btn-solid" style="font-size:15px;padding:14px 36px">
+    Send me a message →
+  </a>
+</div>
+</section>
+
+<footer>
+  <span>© 2026 Thaseem M · Built with intention</span>
+  <span>MBA · HR Management · IIT Guwahati Certified · <a href="#hero">Back to top ↑</a></span>
+</footer>
+
+<script>
+// ── CURSOR ──────────────────────────────────────────
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top = my + 'px';
+});
+
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+
+document.querySelectorAll('a,button,.proj-card,.skill-card,.cert-item,.lead-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.8)'; ring.style.borderColor = 'rgba(0,229,204,0.8)'; });
+  el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(0,229,204,0.5)'; });
+});
+
+// ── TOPBAR SCROLL ─────────────────────────────────
+const topbar = document.getElementById('topbar');
+window.addEventListener('scroll', () => {
+  topbar.classList.toggle('scrolled', window.scrollY > 60);
+  updateNav();
+});
+
+// ── SIDE NAV ──────────────────────────────────────
+function updateNav() {
+  const secs = document.querySelectorAll('section');
+  const links = document.querySelectorAll('.side-nav a');
+  let cur = '';
+  secs.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 200) cur = sec.id;
+  });
+  links.forEach(l => {
+    l.classList.toggle('active', l.dataset.sec === cur);
+  });
+}
+
+// ── SCROLL REVEAL ─────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── INIT ──────────────────────────────────────────
+updateNav();
+</script>
+</body>
+</html>
